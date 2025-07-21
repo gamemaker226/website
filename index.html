@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TSSAOA Terminal Access</title>
+  <style>
+    body {
+      background-color: black;
+      color: #33FF33;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 50px;
+    }
+    #terminal {
+      white-space: pre;
+    }
+    input {
+      background: black;
+      color: #33FF33;
+      border: none;
+      font-family: inherit;
+      font-size: 1.2em;
+      outline: none;
+      width: 200px;
+    }
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="terminal">
+ENTER ACCESS CODE:
+</div>
+<input type="text" id="accessInput" placeholder="e.g. 444444" onkeydown="handleCode(event)">
+<div id="error"></div>
+
+<script>
+  function handleCode(e) {
+    if (e.key === "Enter") {
+      const input = document.getElementById("accessInput").value;
+      if (input === "444444") {
+        window.location.href = "login.html"; // or show the login in same page if you want
+      } else {
+        document.getElementById("error").textContent = "ACCESS DENIED. UNAUTHORIZED ATTEMPT LOGGED.";
+        document.getElementById("accessInput").value = "";
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
