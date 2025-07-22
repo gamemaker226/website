@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <title>TSSAOA Files Directory</title>
@@ -36,6 +36,77 @@
       white-space: pre-wrap;
       min-height: 150px;
     }
+    /* Modal styles */
+    #modalOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      color: #00ff00;
+      font-family: monospace;
+    }
+    #modalWindow {
+      background: #111;
+      border: 2px solid #00ff00;
+      padding: 20px;
+      width: 600px;
+      height: 400px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+    #modalClose {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: #f00;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    #crashScreen {
+      background: #222;
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      padding: 40px;
+      border: 2px solid red;
+      display: none;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    /* Windows 7 emulator mock */
+    #win7Emulator {
+      background: #c0c0c0;
+      border: 3px solid #000080;
+      box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      height: 320px;
+      margin-top: 20px;
+    }
+    #win7TitleBar {
+      background: #000080;
+      color: white;
+      padding: 5px 10px;
+      font-weight: bold;
+      font-family: Tahoma, Geneva, sans-serif;
+      user-select: none;
+    }
+    #win7Screen {
+      background: white;
+      flex-grow: 1;
+      padding: 10px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 14px;
+      overflow-y: auto;
+      color: black;
+    }
   </style>
 </head>
 <body>
@@ -44,47 +115,83 @@
 
   <ul>
     <li onclick="showFile('owner')">tssaoa_owner.log</li>
-    <li onclick="showFile('jeff')">jeff.exe <span style="color: red;">[CORRUPTED]</span></li>
+    <li onclick="launchJeff()">jeff.exe <span style="color: red;">[APP]</span></li>
     <li onclick="showFile('readme')">README.txt</li>
   </ul>
 
   <div id="fileContent">Click a file to view its contents...</div>
 
-  <script>
-    function showFile(file) {
-      const fileContent = document.getElementById('fileContent');
-      if (file === 'owner') {
-        fileContent.textContent = 
+  <!-- Modal for Jeff.exe -->
+  <div id="modalOverlay">
+    <div id="modalWindow">
+      <div id="modalClose" onclick="closeModal()">✖</div>
+      <div id="launchingMsg">Launching jeff.exe...</div>
+      <div id="crashScreen">!!! APPLICATION ERROR !!!<br><br>jeff.exe has stopped working unexpectedly.<br><br>Error code: 0xDEADBEAF</div>
+      <div id="win7Emulator">
+        <div id="win7TitleBar">Windows 7 - Emulator</div>
+        <div id="win7Screen">
+          <p>Welcome to the jeff.exe emulator.</p>
+          <p>This is a sandboxed environment. Explore the secrets...</p>
+          <p><em>(More interactive mini-game content coming soon!)</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function showFile(file) {
+    const fileContent = document.getElementById('fileContent');
+    if (file === 'owner') {
+      fileContent.textContent = 
 `--- tssaoa_owner.log ---
-Agent: ZestyCatDefender
+Agent: Michael
 Access Level: 99 Council
 Last Login: [REDACTED]
 Notes:
-- The Jeff.exe virus is highly unstable.
-- Containment protocols must not be breached.
-- Research ongoing into corrupted files in sector 7.
+- Jeff.exe is an experimental AI-based virus.
+- Containment protocols must never fail.
+- Corruption detected in sector 7 data logs.
 `;
-      } else if (file === 'jeff') {
-        fileContent.textContent = 
-`--- jeff.exe ---
-ERROR: FILE CORRUPTED
-Unable to open.  
-WARNING: Data corruption may cause system instability.
-
-[?] Try running recovery? (feature coming soon...)`;
-      } else if (file === 'readme') {
-        fileContent.textContent = 
+    } else if (file === 'readme') {
+      fileContent.textContent = 
 `--- README.txt ---
-Welcome to the TSSAOA files directory.
+Welcome to the TSSAOA secure files directory.
 
-Access is restricted to authorized personnel only.
+Authorized personnel only.
 
-Use caution when interacting with unknown files.
-
-Further instructions coming soon.`;
-      }
+More data and files will be unlocked soon.`;
     }
-  </script>
+  }
+
+  function launchJeff() {
+    const modal = document.getElementById('modalOverlay');
+    const launchingMsg = document.getElementById('launchingMsg');
+    const crashScreen = document.getElementById('crashScreen');
+    const win7Emulator = document.getElementById('win7Emulator');
+
+    modal.style.display = 'flex';
+    launchingMsg.style.display = 'block';
+    crashScreen.style.display = 'none';
+    win7Emulator.style.display = 'none';
+
+    // After 3 seconds, show crash screen
+    setTimeout(() => {
+      launchingMsg.style.display = 'none';
+      crashScreen.style.display = 'block';
+
+      // After 4 seconds, hide crash and show emulator
+      setTimeout(() => {
+        crashScreen.style.display = 'none';
+        win7Emulator.style.display = 'flex';
+      }, 4000);
+    }, 3000);
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('modalOverlay');
+    modal.style.display = 'none';
+  }
+</script>
 
 </body>
 </html>
