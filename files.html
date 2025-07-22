@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TSSAOA Files Directory</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      border-bottom: 1px dashed #00ff00;
+      padding-bottom: 10px;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin: 8px 0;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    li:hover {
+      color: #ff5555;
+    }
+    #fileContent {
+      margin-top: 30px;
+      border: 1px solid #00ff00;
+      padding: 15px;
+      background-color: #111;
+      white-space: pre-wrap;
+      min-height: 150px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>TSSAOA Secure Files</h1>
+
+  <ul>
+    <li onclick="showFile('owner')">tssaoa_owner.log</li>
+    <li onclick="showFile('jeff')">jeff.exe <span style="color: red;">[CORRUPTED]</span></li>
+    <li onclick="showFile('readme')">README.txt</li>
+  </ul>
+
+  <div id="fileContent">Click a file to view its contents...</div>
+
+  <script>
+    function showFile(file) {
+      const fileContent = document.getElementById('fileContent');
+      if (file === 'owner') {
+        fileContent.textContent = 
+`--- tssaoa_owner.log ---
+Agent: ZestyCatDefender
+Access Level: 99 Council
+Last Login: [REDACTED]
+Notes:
+- The Jeff.exe virus is highly unstable.
+- Containment protocols must not be breached.
+- Research ongoing into corrupted files in sector 7.
+`;
+      } else if (file === 'jeff') {
+        fileContent.textContent = 
+`--- jeff.exe ---
+ERROR: FILE CORRUPTED
+Unable to open.  
+WARNING: Data corruption may cause system instability.
+
+[?] Try running recovery? (feature coming soon...)`;
+      } else if (file === 'readme') {
+        fileContent.textContent = 
+`--- README.txt ---
+Welcome to the TSSAOA files directory.
+
+Access is restricted to authorized personnel only.
+
+Use caution when interacting with unknown files.
+
+Further instructions coming soon.`;
+      }
+    }
+  </script>
+
+</body>
+</html>
