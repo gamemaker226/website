@@ -1,67 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TSSAOA Login</title>
+  <title>99 Council Login</title>
   <style>
     body {
-      background-color: #0a0a0a;
-      color: #00ffcc;
+      background-color: #000;
+      color: #0f0;
       font-family: monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
+      text-align: center;
+      padding-top: 100px;
     }
-
-    h1 {
-      margin-bottom: 20px;
-    }
-
-    input {
+    input, button {
       background: #111;
-      border: 2px solid #00ffcc;
+      color: #0f0;
+      border: 1px solid #0f0;
       padding: 10px;
-      margin: 8px 0;
-      color: #00ffcc;
-      width: 250px;
-    }
-
-    button {
-      padding: 10px 25px;
-      background-color: #00ffcc;
-      color: #000;
-      border: none;
-      cursor: pointer;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .captcha {
-      margin-top: 20px;
-      font-style: italic;
-      color: #888;
+      margin: 5px;
     }
   </style>
 </head>
 <body>
-  <h1>99 Council Login</h1>
+  <h1>Enter 99 Council Access</h1>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <input type="text" id="captcha" placeholder="Type 'Real death 99'"><br>
+  <button onclick="login()">Login</button>
 
-  <form action="/dashboard.html" method="POST">
-    <label for="username">User:</label><br />
-    <input type="text" id="username" name="username" value="tssaoawoker99" required /><br />
+  <script>
+    function login() {
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      const c = document.getElementById('captcha').value;
 
-    <label for="password">Password:</label><br />
-    <input type="password" id="password" name="password" value="ghhzlzmnzx" required /><br />
-
-    <div class="captcha">
-      Captcha: Type in the word you see → <strong>Real Death 99</strong>
-    </div>
-    <input type="text" name="captcha" placeholder="Type it exactly..." required /><br />
-
-    <button type="submit">Enter</button>
-  </form>
+      if (u === 'tssaoawoker99' && p === 'ghhzlzmnzx' && c === 'Real death 99') {
+        window.location.href = "main.html";
+      } else {
+        alert("ACCESS DENIED");
+      }
+    }
+  </script>
 </body>
 </html>
